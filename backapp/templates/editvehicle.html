@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" action="{% url 'updatevehicle' dataid=data.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+<div class="col-sm-12 col-xl-6">
+
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Edit Vehicle Information</h6>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="vehicle name" name="vename" value="{{ data.vname }}">
+                                <label for="floatingInput">Vehicle Name</label>
+                            </div>
+                            <div class="form-floating mb-3" >
+
+                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="vetype" >
+                                    <option selected="">select </option>
+                                    <option value="two wheeler">Two wheeler</option>
+                                    <option value="three wheeler">Three wheeler</option>
+                                    <option value="four wheeler">Four wheeler</option>
+                                </select>
+                                <label for="floatingSelect">vehicle type</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingPassword" placeholder="Vehicle model" name="vemodel" value="{{ data.vmodel }}">
+                                <label for="floatingPassword">Vehicle model</label>
+                            </div>
+
+                            <div class="form-floating" >
+                                <input type="text" class="form-control" placeholder="Leave a description here" id="floatingTextarea" style="height: 150px;" name="vedescription" value="{{ data.vdescription }}" >
+                                <label for="floatingTextarea">Vehicle description</label>
+                            </div>
+                            <br>
+
+                            <button type="submit" class="btn btn-danger">submit</button>
+                        </div>
+                    </div>
+    </form>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+   {% if messages %}
+  {% for message in messages %}
+
+   {% if message.tags == 'warning' %}
+   <script>
+     swal('{{message}}','','warning');
+   </script>
+
+   {% elif message.tags == 'error' %}
+   <script>
+     swal('{{message}}','','error');
+   </script>
+
+   {% else%}
+   <script>
+     swal('{{message}}','','success');
+   </script>
+
+   {% endif %}
+
+   {% endfor %} {% endif %}
+</body>
+</html>
+{% endblock %}
